@@ -12,4 +12,8 @@ class Type extends Model
     protected $fillable = ['name'];
     protected $table = 'type';
 
+    public function pricelist()
+    {
+        return $this->hasMany(Pricelist::class);
+    }
 }

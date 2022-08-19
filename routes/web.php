@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KotaController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\JenisController;
+use App\Http\Controllers\WarnaController;
+use App\Http\Controllers\FormulaController;
+use App\Http\Controllers\PricelistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +51,37 @@ Route::post('type/store', [TypeController::class, 'store'])->name('type.store');
 Route::get('type/{id}/edit', [TypeController::class, 'edit'])->name('type.edit');
 Route::post('type/{id}/update', [TypeController::class, 'update'])->name('type.update');
 Route::post('type/{id}/delete', [TypeController::class, 'delete'])->name('type.destroy');
+
+// Jenis
+Route::get('jenis', [JenisController::class, 'index'])->name('jenis.index');
+Route::get('jenis/create', [JenisController::class, 'create'])->name('jenis.create');
+Route::post('jenis/store', [JenisController::class, 'store'])->name('jenis.store');
+Route::get('jenis/{id}/edit', [JenisController::class, 'edit'])->name('jenis.edit');
+Route::post('jenis/{id}/update', [JenisController::class, 'update'])->name('jenis.update');
+Route::post('jenis/{id}/delete', [JenisController::class, 'delete'])->name('jenis.destroy');
+
+// Pricelist
+Route::get('pricelist', [PricelistController::class, 'index'])->name('pricelist.index');
+Route::get('pricelist/create', [PricelistController::class, 'create'])->name('pricelist.create');
+Route::post('pricelist/store', [PricelistController::class, 'store'])->name('pricelist.store');
+Route::get('pricelist/{id}/edit', [PricelistController::class, 'edit'])->name('pricelist.edit');
+Route::post('pricelist/{id}/update', [PricelistController::class, 'update'])->name('pricelist.update');
+Route::post('pricelist/{id}/delete', [PricelistController::class, 'delete'])->name('pricelist.destroy');
+
+// Warna
+Route::get('warna', [WarnaController::class, 'index'])->name('warna.index');
+Route::get('warna/create', [WarnaController::class, 'create'])->name('warna.create');
+Route::post('warna/store', [WarnaController::class, 'store'])->name('warna.store');
+Route::get('warna/{id}/edit', [WarnaController::class, 'edit'])->name('warna.edit');
+Route::post('warna/{id}/update', [WarnaController::class, 'update'])->name('warna.update');
+Route::post('warna/{id}/delete', [WarnaController::class, 'delete'])->name('warna.destroy');
+
+// Formula
+Route::get('formula', [FormulaController::class, 'index'])->name('formula.index');
+Route::get('formula/create', [FormulaController::class, 'create'])->name('formula.create');
+Route::post('formula/store', [FormulaController::class, 'store'])->name('formula.store');
+Route::get('formula/{id}/edit', [FormulaController::class, 'edit'])->name('formula.edit');
+Route::post('formula/{id}/update', [FormulaController::class, 'update'])->name('formula.update');
+Route::post('formula/{id}/delete', [FormulaController::class, 'delete'])->name('formula.destroy');
+
+

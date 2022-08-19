@@ -56,6 +56,29 @@
                                 Type
                             </a>
 
+                            {{-- Jenis --}}
+                            <a class="nav-link" href="{{route('jenis.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Jenis
+                            </a>
+
+                            {{-- Warna --}}
+                            <a class="nav-link" href="{{route('warna.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Warna
+                            </a>
+
+                            {{-- Formula --}}
+                            <a class="nav-link" href="{{route('formula.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Formula
+                            </a>
+
+                            {{-- Pricelist --}}
+                            <a class="nav-link" href="{{route('pricelist.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i> Pricelist</div>
+                            </a>
+
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
