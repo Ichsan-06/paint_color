@@ -24,9 +24,10 @@ class FormulaController extends Controller
     // Store
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
             'warna_id' => 'required',
-            'kode_base' => 'required',
+            'jenis_id' => 'required',
             'kode_formula' => 'required',
             'galon' => 'required|numeric',
             'pail' => 'required|numeric',
@@ -48,7 +49,7 @@ class FormulaController extends Controller
     {
         $request->validate([
             'warna_id' => 'required',
-            'kode_base' => 'required',
+            'jenis_id' => 'required',
             'kode_formula' => 'required',
             'galon' => 'required|numeric',
             'pail' => 'required|numeric',

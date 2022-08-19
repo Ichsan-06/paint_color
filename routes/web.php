@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AwalanController;
 use App\Http\Controllers\KotaController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\JenisController;
@@ -26,12 +27,19 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/', function () {
-    return view('login');
+    // Kota
+    $kota = App\Models\Kota::all();
+    return view('welcome',compact('kota'));
 });
+
+Route::get('/price/kota/{id_kota}',[AwalanController::class,'kota'])->name('price.kota');
+Route::get('/price/kota/{kota_id}/warna/{warna_id}',[AwalanController::class,'warna'])->name('price.warna');
+Route::get('/list-harga',[AwalanController::class,'listHarga'])->name('list.harga');
 
 Route::get('login', function () {
     return view('login');
 })->name('login');
+
 
 Route::post('login', [AuthController::class,'login'])->name('login.post');
 Route::post('logout', [AuthController::class,'logout'])->name('logout');

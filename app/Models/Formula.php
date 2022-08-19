@@ -11,7 +11,7 @@ class Formula extends Model
 
     protected $fillable = [
         'warna_id',
-        'kode_base',
+        'jenis_id',
         'kode_formula',
         'galon',
         'pail',
@@ -21,5 +21,11 @@ class Formula extends Model
     public function warna()
     {
         return $this->belongsTo(Warna::class);
+    }
+
+    // Jenis
+    public function jenis()
+    {
+        return $this->belongsTo(Jenis::class);
     }
 }

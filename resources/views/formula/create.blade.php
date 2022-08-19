@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="kode_base">Kode Base</label>
-                        <input type="text" name="kode_base" id="kode_base" class="form-control" placeholder="Kode Base">
+                        <input type="text" name="jenis_id" id="kode_base" class="form-control" placeholder="Kode Base">
                     </div>
                     <div class="form-group">
                         <label for="kode_formula">Kode Formula</label>

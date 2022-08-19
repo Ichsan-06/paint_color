@@ -16,4 +16,9 @@ class Jenis extends Model
     {
         return $this->hasMany(Pricelist::class);
     }
+
+    public function formula()
+    {
+        return $this->hasMany(Formula::class);
+    }
 }
