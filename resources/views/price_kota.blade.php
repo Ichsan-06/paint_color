@@ -60,6 +60,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('price.warna',['kota_id'=>$kota->id,'warna_id'=>$item->id])}}" class="btn btn-sm btn-primary">Lihat</a>
+                                    <a href="{{route('hitung',['warna_id'=>$item->id])}}" class="btn btn-sm btn-success">Hitung</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -129,7 +130,10 @@
                 </button>
                 <div class="collapse" id="list">
                     <div class="card card-body">
-                        <a href="{{route('list.harga')}}" class="btn btn-success">Daftar List Harga</a>
+                        <a href="{{route('list.harga',$kota->id)}}" class="btn btn-success">Daftar List Harga</a>
+                        <br>
+                        <a href="{{route('list.formula',$kota->id)}}" class="btn btn-success mb-1">Daftar List Formula</a>
+                        <a href="{{route('list.formulaHarga',$kota->id)}}" class="btn btn-success">Daftar List Formula & Harga </a>
                     </div>
                 </div>
             </div>

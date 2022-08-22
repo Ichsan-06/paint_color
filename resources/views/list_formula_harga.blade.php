@@ -104,14 +104,68 @@
     <br><button type="button" onclick="printDiv('printableArea')" class="block">Print</button><br>
     <div id="printableArea">
         <center style="border-style: solid; border-width:1px; border-color: #000000;">
-            <font size="4"><b>Daftar Harga - Deck@Paint Coloring System Coloring System - Aceh</b>
+            <font size="4"><b>Daftar Formula & Harga - <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                        data-cfemail="571332343c1707363e3923">[email&#160;protected]</a> Coloring System - Aceh</b>
             </font><br>
-            <font size="2.5">Data per Tanggal : 20/08/2022 11:20:06</font>
+            <font size="2.5">Data per Tanggal : 21/08/2022 11:41:13</font>
+        </center>
+        <center style="border-style: solid; border-width:1px; border-color: #000000; margin-top:3px;">
+            <font size="2.5">Varian : Star, Brite, Cryl, Nodeless, Extercoat</font>
         </center>
         <div class="row">
-            <div class="column_harga" style="background-color:#ffffff;">
-                @foreach ($warnas as $warna)
-                    <table class="table-style-one" width=100% style="margin-top:30px">
+            @foreach ($warnas as $warna)
+                <div class="column" style="background-color:#ffffff;">
+                    <table class="table-style-one" width=100%>
+                        <thead>
+                            <tr>
+                                <th colspan="3">{{ $warna->kode_warna }}</th>
+                            </tr>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Galon</th>
+                                <th>Pail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <center>
+                                        @if (isset($warna->formula[0]))
+                                            {{ $warna->formula[0]->jenis->name }}
+                                        @else
+                                            -
+                                        @endif
+                                    </center>
+                                </td>
+                                <td>
+                                    <center>1</center>
+                                </td>
+                                <td>
+                                    <center>1</center>
+                                </td>
+                            </tr>
+                            @if (isset($warna->formula[0]))
+                                @foreach ($warna->formula as $formula)
+                                    <tr>
+                                        <td>
+                                            <center>{{ $formula->kode_formula }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $formula->galon }}</center>
+                                        </td>
+                                        <td>
+                                            <center>{{ $formula->pail }}</center>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="column_formula_harga_2" style="background-color:#ffffff;">
+                    <table class="table-style-one" width=100%>
                         <thead>
                             <tr>
                                 <th colspan="3">{{ $warna->kode_warna }}</th>
@@ -124,12 +178,11 @@
                         </thead>
                         <tbody>
                             @if (isset($warna->formula[0]))
-
-                            @foreach ($warna->formula[0]->jenis->pricelist as $pricelist)
-                            @php
-                                $galon = 0;
-                                $pail =0;
-                            @endphp
+                                @foreach ($warna->formula[0]->jenis->pricelist as $pricelist)
+                                    @php
+                                        $galon = 0;
+                                        $pail = 0;
+                                    @endphp
                                     <tr>
                                         <td>
                                             {{ $pricelist->type->name }}
@@ -142,10 +195,10 @@
                                                     } else {
                                                         $price = 230;
                                                     }
-                                                    $galon += ($v_warna->galon * $price);
+                                                    $galon += $v_warna->galon * $price;
                                                 }
                                             @endphp
-                                            {{rupiah($galon+$pricelist->galon)}}
+                                            {{ rupiah($galon + $pricelist->galon) }}
                                         </td>
                                         <td>
                                             @php
@@ -155,97 +208,18 @@
                                                     } else {
                                                         $price = 230;
                                                     }
-                                                    $pail += ($v_warna->pail * $price);
+                                                    $pail += $v_warna->pail * $price;
                                                 }
                                             @endphp
-                                            {{rupiah($pail+$pricelist->pail)}}
+                                            {{ rupiah($pail + $pricelist->pail) }}
                                         </td>
                                     </tr>
                                 @endforeach
                             @endif
-                            {{-- <tr>
-                                <td>
-                                    <center><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="eda9a8aea6adbeb9acbf">[email&#160;protected]</a></center>
-                                </td>
-                                <td>
-                                    <center>Rp. 123,760</center>
-                                </td>
-                                <td>
-                                    <center>Rp. 578,800</center>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <center><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="094d4c4a424945405d4c">[email&#160;protected]</a></center>
-                                </td>
-                                <td>
-                                    <center>Rp. 160,760</center>
-                                </td>
-                                <td>
-                                    <center>Rp. 758,800</center>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <center><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="206465636b606372796c">[email&#160;protected]</a></center>
-                                </td>
-                                <td>
-                                    <center>Rp. 210,760</center>
-                                </td>
-                                <td>
-                                    <center>Rp. 1,013,800</center>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <center><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="6226272129222c2d26272e273131">[email&#160;protected]</a>
-                                    </center>
-                                </td>
-                                <td>
-                                    <center>Rp. 265,760</center>
-                                </td>
-                                <td>
-                                    <center>Rp. 1,278,800</center>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <center><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="155150565e55504d415047565a5441">[email&#160;protected]</a>
-                                    </center>
-                                </td>
-                                <td>
-                                    <center>Rp. 355,760</center>
-                                </td>
-                                <td>
-                                    <center>Rp. 1,728,800</center>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <center><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                            data-cfemail="490d0c0a0209">[email&#160;protected]</a> 3 IN 1</center>
-                                </td>
-                                <td>
-                                    <center>Rp. 206,608</center>
-                                </td>
-                                <td>
-                                    <center>Rp. 993,040</center>
-                                </td>
-                            </tr> --}}
                         </tbody>
                     </table>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>

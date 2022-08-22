@@ -29,20 +29,24 @@ Route::get('/dashboard', function () {
 Route::get('/', function () {
     // Kota
     $kota = App\Models\Kota::all();
-    return view('welcome',compact('kota'));
+    return view('welcome', compact('kota'));
 });
 
-Route::get('/price/kota/{id_kota}',[AwalanController::class,'kota'])->name('price.kota');
-Route::get('/price/kota/{kota_id}/warna/{warna_id}',[AwalanController::class,'warna'])->name('price.warna');
-Route::get('/list-harga',[AwalanController::class,'listHarga'])->name('list.harga');
+Route::get('/price/kota/{id_kota}', [AwalanController::class, 'kota'])->name('price.kota');
+Route::get('/price/kota/{kota_id}/warna/{warna_id}', [AwalanController::class, 'warna'])->name('price.warna');
+Route::get('/list-harga/{kota_id}', [AwalanController::class, 'listHarga'])->name('list.harga');
+Route::get('/list-formula/{kota_id}', [AwalanController::class, 'listFormula'])->name('list.formula');
+Route::get('/list-formula-harga/{kota_id}', [AwalanController::class, 'listFormulaHarga'])->name('list.formulaHarga');
+Route::get('/hitung/{warna_id}', [AwalanController::class, 'hitung'])->name('hitung');
+Route::post('/hitung/{warna_id}', [AwalanController::class, 'postHitung'])->name('hitung.post');
 
 Route::get('login', function () {
     return view('login');
 })->name('login');
 
 
-Route::post('login', [AuthController::class,'login'])->name('login.post');
-Route::post('logout', [AuthController::class,'logout'])->name('logout');
+Route::post('login', [AuthController::class, 'login'])->name('login.post');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // Kota
 Route::get('kota', [KotaController::class, 'index'])->name('kota.index');
@@ -91,5 +95,3 @@ Route::post('formula/store', [FormulaController::class, 'store'])->name('formula
 Route::get('formula/{id}/edit', [FormulaController::class, 'edit'])->name('formula.edit');
 Route::post('formula/{id}/update', [FormulaController::class, 'update'])->name('formula.update');
 Route::post('formula/{id}/delete', [FormulaController::class, 'delete'])->name('formula.destroy');
-
-

@@ -14,7 +14,7 @@ class PricelistController extends Controller
             'kota',
             'type',
             'jenis',
-        ])->get();
+        ])->latest()->get();
         // return $pricelists;
         return view('pricelist.index', compact('pricelists'));
     }
