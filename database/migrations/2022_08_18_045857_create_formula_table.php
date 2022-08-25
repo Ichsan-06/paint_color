@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('warna_id');
             $table->unsignedBigInteger('jenis_id');
-            $table->string('kode_formula');
-            $table->string('galon');
-            $table->string('pail');
+            $table->string('kode_formula')->nullable();
+            $table->string('galon')->nullable();
+            $table->string('pail')->nullable();
             $table->timestamps();
 
             $table->foreign('warna_id')->references('id')->on('warna')->onDelete('cascade');

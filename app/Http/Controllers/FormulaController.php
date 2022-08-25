@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Formula;
 use Illuminate\Http\Request;
+use App\Imports\FormulaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FormulaController extends Controller
 {
     // Index
     public function index()
     {
-        $formulas = Formula::with('warna')->get();
+        $formulas = Formula::with('warna','jenis')->get();
         return view('formula.index', compact('formulas'));
     }
 
@@ -63,6 +65,19 @@ class FormulaController extends Controller
     {
         Formula::find($formula)->delete();
         return redirect()->route('formula.index')->with('success', 'Data formula berhasil dihapus');
+    }
+
+    // Import
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx'
+        ]);
+        $path = $request->file('file');
+
+        Excel::import(new FormulaImport, $path);
+
+        return redirect()->route('formula.index')->with('success', 'Data formula berhasil diimport');
     }
 
 }

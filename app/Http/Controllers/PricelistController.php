@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pricelist;
 use Illuminate\Http\Request;
+use App\Imports\PricelistImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PricelistController extends Controller
 {
@@ -36,8 +38,6 @@ class PricelistController extends Controller
             'kota_id' => 'required|exists:kota,id',
             'type_id' => 'required|exists:type,id',
             'jenis_id' => 'required|exists:jenis,id',
-            'galon' => 'required',
-            'pail' => 'required',
         ],
         [
             'kota_id.required' => 'Kota harus diisi!',
@@ -78,8 +78,6 @@ class PricelistController extends Controller
             'kota_id' => 'required|exists:kota,id',
             'type_id' => 'required|exists:type,id',
             'jenis_id' => 'required|exists:jenis,id',
-            'galon' => 'required',
-            'pail' => 'required',
         ],
         [
             'kota_id.required' => 'Kota harus diisi!',
@@ -107,5 +105,19 @@ class PricelistController extends Controller
         $pricelist = Pricelist::find($id);
         $pricelist->delete();
         return redirect()->route('pricelist.index');
+    }
+
+    // IMport
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx'
+        ]);
+        $path = $request->file('file');
+
+        Excel::import(new PricelistImport, $path);
+
+        return back()->with('success', 'Insert Record successfully.');
     }
 }

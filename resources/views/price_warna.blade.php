@@ -95,10 +95,54 @@
                                 @endphp
                             </td>
                     @endforeach
+
+                    @foreach ($threeOne as $item)
+                        <tr>
+                            <td>{{ $item->name }}</td>
+                            <td>
+                                @php
+                                    if (isset($item->pricelist[0])) {
+                                        $hargaAwal = $item->pricelist[0]->galon;
+                                        $galon = 0;
+                                        foreach ($item->pricelist[0]->jenis->formula as $formula => $harga) {
+                                            if ($formula == 1) {
+                                                $price = 290;
+                                            } else {
+                                                $price = 230;
+                                            }
+
+                                            $galon += (($harga->galon * $price)*4)/5;
+                                        }
+
+                                        echo rupiah($hargaAwal + $galon);
+                                    }
+                                @endphp
+                            </td>
+                            <td>
+                                @php
+                                    if (isset($item->pricelist[0])) {
+                                        $hargaAwal = $item->pricelist[0]->pail;
+                                        $pail = 0;
+                                        foreach ($item->pricelist[0]->jenis->formula as $formula => $harga) {
+                                            if ($formula == 1) {
+                                                $price = 290;
+                                            } else {
+                                                $price = 230;
+                                            }
+
+                                            $pail += (($harga->pail * $price)/5)*4;
+                                        }
+
+                                        echo rupiah($hargaAwal + $pail);
+                                    }
+                                @endphp
+                            </td>
+                    @endforeach
                 </table>
             </div>
 
             <div class="card mt-4" style="border: 0px">
+
                 @foreach ($type as $types)
                     <button data-bs-toggle="collapse" data-bs-target="#demo-{{ $types->id }}"
                         class="btn btn-dark mt-3">{{ $types->name }}</button>
@@ -155,7 +199,7 @@
 
                         <table class="table">
                             <tr>
-                                <td colspan="4" class="text-center">Detail Harga Galon</td>
+                                <td colspan="4" class="text-center">Detail Harga Pail</td>
                             </tr>
                             <tr>
                                 <th>Kode</th>
@@ -204,6 +248,113 @@
 
                     </div>
                 @endforeach
+
+                @foreach ($threeOne as $types)
+                    <button data-bs-toggle="collapse" data-bs-target="#demo-{{ $types->id }}"
+                        class="btn btn-dark mt-3">{{ $types->name }}</button>
+
+                    <div id="demo-{{ $types->id }}" class="collapse">
+                        <table class="table">
+                            <tr>
+                                <td colspan="4" class="text-center">Detail Harga Galon</td>
+                            </tr>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Harga</th>
+                                <th>Qty</th>
+                                <th>Total Harga</th>
+                            </tr>
+
+                            @if (isset($types->pricelist[0]))
+                                <tr>
+                                    <td>{{ $types->pricelist[0]->jenis->name }}</td>
+                                    <td>{{ rupiah($types->pricelist[0]->galon) }}</td>
+                                    <td>1</td>
+                                    <td>{{ rupiah($types->pricelist[0]->galon) }}</td>
+                                </tr>
+                                @php
+                                    $result = 0;
+                                @endphp
+                                @foreach ($types->pricelist[0]->jenis->formula as $formula => $harga)
+                                    @php
+                                        if ($formula == 1) {
+                                            $price = 290;
+                                        } else {
+                                            $price = 230;
+                                        }
+
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $harga->kode_formula }}</td>
+                                        <td>{{ $price . '/ ml' }}</td>
+                                        <td>{{ (($harga->galon*4)/5) . '0 ml' }}</td>
+                                        <td>{{ rupiah((($harga->galon*4)/5) * $price) }}</td>
+                                    </tr>
+
+                                    @php
+                                        $result += (($harga->galon*4)/5) * $price;
+                                    @endphp
+                                @endforeach
+                                <tr>
+                                    <td colspan="3" align="center">Total Harga</td>
+                                    <td align="left">{{ rupiah($result + $types->pricelist[0]->galon) }}</td>
+
+                                </tr>
+                            @endif
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <td colspan="4" class="text-center">Detail Harga Pail</td>
+                            </tr>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Harga</th>
+                                <th>Qty</th>
+                                <th>Total Harga</th>
+                            </tr>
+
+                            @if (isset($types->pricelist[0]))
+                                <tr>
+                                    <td>{{ $types->pricelist[0]->jenis->name }}</td>
+                                    <td>{{ rupiah($types->pricelist[0]->pail) }}</td>
+                                    <td>1</td>
+                                    <td>{{ rupiah($types->pricelist[0]->pail) }}</td>
+                                </tr>
+                                @php
+                                    $result = 0;
+                                @endphp
+                                @foreach ($types->pricelist[0]->jenis->formula as $formula => $harga)
+                                    @php
+                                        if ($formula == 1) {
+                                            $price = 290;
+                                        } else {
+                                            $price = 230;
+                                        }
+
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $harga->kode_formula }}</td>
+                                        <td>{{ $price . '/ ml' }}</td>
+                                        <td>{{ (($harga->pail/5)*4) . ' ml' }}</td>
+                                        <td>{{ rupiah((($harga->pail/5)*4) * $price) }}</td>
+                                    </tr>
+
+                                    @php
+                                        $result += (($harga->pail/5)*4) * $price;
+                                    @endphp
+                                @endforeach
+                                <tr>
+                                    <td colspan="3" align="center">Total Harga</td>
+                                    <td align="left">{{ rupiah($result + $types->pricelist[0]->pail) }}</td>
+
+                                </tr>
+                            @endif
+                        </table>
+
+                    </div>
+                @endforeach
+
             </div>
 
             <div class="card mt-4 mb-4" style="border: 0px">
@@ -255,6 +406,37 @@
                                     </td>
                                 </tr>
                             @endforeach
+
+                            <tr>
+                                <td>Colorant</td>
+                                <td>
+                                    <table class="table">
+                                        @foreach ($colorants as $colorant)
+                                            <tr>
+                                                <td> {{ $colorant->kode }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table">
+                                        @foreach ($colorants as $colorant)
+                                            <tr>
+                                                <td> {{ rupiah($colorant->harga) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table">
+                                        @foreach ($colorants as $colorant)
+                                            <tr>
+                                                <td> {{ $colorant->satuan }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

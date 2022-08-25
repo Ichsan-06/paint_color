@@ -16,4 +16,9 @@ class Kota extends Model
     {
         return $this->hasMany(Pricelist::class);
     }
+
+    public function colorant()
+    {
+        return $this->hasMany(Colorant::class);
+    }
 }

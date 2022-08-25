@@ -13,10 +13,23 @@
             {{-- Card Header --}}
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-6">
-                        <a href="{{ route('formula.create') }}" class="btn btn-primary">Tambah Formula</a>
+                    <div class="col-md-2">
+                        <a href="{{ route('formula.create') }}" class="btn btn-sm btn-primary">Tambah Formula</a>
                     </div>
-
+                    <div class="col-md-10">
+                        <form action="{{route('formula.import')}}" class="d-flex justify-content-center" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <input type="file" name="file" id="" class="form-control">
+                                </div>
+                                <div class="col-md-2 d-flex">
+                                    <button type="submit" class="btn btn-sm btn-primary">Import</button>&nbsp
+                                    <a href="{{asset('formula.xlsx')}}" download class="btn btn-sm btn-success">Format</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -37,7 +50,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $formula->warna->kode_warna }}</td>
-                            <td>{{ $formula->kode_base }}</td>
+                            <td>{{ $formula->jenis->name }}</td>
                             <td>{{ $formula->kode_formula }}</td>
                             <td>{{ $formula->galon }}</td>
                             <td>{{ $formula->pail }}</td>

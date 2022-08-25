@@ -134,6 +134,12 @@
                         <br>
                         <a href="{{route('list.formula',$kota->id)}}" class="btn btn-success mb-1">Daftar List Formula</a>
                         <a href="{{route('list.formulaHarga',$kota->id)}}" class="btn btn-success">Daftar List Formula & Harga </a>
+                        <br>
+                        <a href="{{route('formula.inOne',['formula_id'=>$type->id,'kota_id'=>$kota->id])}}" class="btn btn-success mb-1">Daftar List Formula - DECK@EGO dan 3 IN 1 </a>
+                        <a href="{{route('formula.hargaInOne',['kota_id'=>$kota->id])}}" class="btn btn-success">Daftar List Formula & Harga - DECK@EGO dan 3 IN 1 </a>
+                        <br>
+                        <a href="{{route('formula.inOne',['formula_id'=>$type->id,'kota_id'=>$kota->id])}}" class="btn btn-success mb-1">Daftar List Formula - DECK@EGO dan 3 IN 1 </a>
+                        <a href="{{route('formula.hargaInOne',['kota_id'=>$kota->id])}}" class="btn btn-success">Daftar List Formula & Harga - DECK@EGO dan 3 IN 1 </a>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Kota ID</th>
                             <th>Nama Kota</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +34,7 @@
                         @foreach ($kota as $k)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $k->id }}</td>
                                 <td>{{ $k->nama_kota }}</td>
                                 <td>
                                     <a href="{{ route('kota.edit', $k->id) }}" class="btn btn-sm btn-primary">Edit</a>

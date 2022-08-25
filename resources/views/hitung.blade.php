@@ -96,10 +96,8 @@
 
                         <tr>
                             <td colspan="3">
-                                <input type="submit" name="submit" class="btn btn-success btn-block"
-                                    style="width=100%;" value="Hitung Harga - DECK@">
-                                <input type="submit" name="submit_2" class="btn btn-success btn-block"
-                                    style="width=100%;" value="Hitung Harga - DECK@ 3 IN 1">
+                                <button type="submit" name="action" value="decka" class="btn btn-sm btn-primary">Hitung Harga - DECK@</button>
+                                <button type="submit" name="action" value="3in1" class="btn btn-sm btn-primary">Hitung Harga - DECK@ 3 IN 1</button>
                             </td>
                         </tr>
                     </tbody>
@@ -132,9 +130,9 @@
                                 @endphp
                                 @foreach ($type->pricelist[0]->jenis->formula as $formula => $harga)
                                     @php
-                                        if($formula == 0){
+                                        if ($formula == 0) {
                                             $ms = $request->MS;
-                                        }else{
+                                        } else {
                                             $ms = $request->BP;
                                         }
                                     @endphp
@@ -183,9 +181,9 @@
                                 @endphpimage.png
                                 @foreach ($type->pricelist[0]->jenis->formula as $formula => $harga)
                                     @php
-                                        if($formula == 0){
+                                        if ($formula == 0) {
                                             $ms = $request->MS;
-                                        }else{
+                                        } else {
                                             $ms = $request->BP;
                                         }
                                     @endphp
@@ -200,6 +198,114 @@
 
                                     @php
                                         $result += $ms * $harga->pail;
+                                    @endphp
+                                @endforeach
+                                <tr>
+                                    <td colspan="3" align="center">Total Harga</td>
+                                    <td align="left">{{ rupiah($result + $request->harga_base_pail) }}
+                                    </td>
+
+                                </tr>
+                            @endif
+                        </table>
+                    </div>
+                </div>
+            @endif
+
+            @if (isset($typeThree))
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td colspan="4" class="text-center">Detail Harga Galon</td>
+                            </tr>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Harga</th>
+                                <th>Qty</th>
+                                <th>Total Harga</th>
+                            </tr>
+
+                            @if (isset($typeThree->pricelist[0]))
+                                <tr>
+                                    <td>{{ $typeThree->pricelist[0]->jenis->name }}</td>
+                                    <td>{{ rupiah($request->harga_base_galon) }}</td>
+                                    <td>1</td>
+                                    <td>{{ rupiah($request->harga_base_galon) }}</td>
+                                </tr>
+                                @php
+                                    $result = 0;
+                                @endphp
+                                @foreach ($typeThree->pricelist[0]->jenis->formula as $formula => $harga)
+                                    @php
+                                        if ($formula == 0) {
+                                            $ms = $request->MS;
+                                        } else {
+                                            $ms = $request->BP;
+                                        }
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $harga->kode_formula }}</td>
+                                        <td>{{ $ms . '/ ml' }}</td>
+                                        <td>
+                                            {{ (($harga->galon*4)/5) . ' ml' }}
+                                        </td>
+                                        <td>{{ rupiah($ms * (($harga->galon*4)/5)) }}</td>
+                                    </tr>
+
+                                    @php
+                                        $result += $ms * (($harga->galon*4)/5);
+                                    @endphp
+                                @endforeach
+                                <tr>
+                                    <td colspan="3" align="center">Total Harga</td>
+                                    <td align="left">{{ rupiah($result + $request->harga_base_galon) }}
+                                    </td>
+
+                                </tr>
+                            @endif
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <td colspan="4" class="text-center">Detail Harga Galon</td>
+                            </tr>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Harga</th>
+                                <th>Qty</th>
+                                <th>Total Harga</th>
+                            </tr>
+
+                            @if (isset($typeThree->pricelist[0]))
+                                <tr>
+                                    <td>{{ $typeThree->pricelist[0]->jenis->name }}</td>
+                                    <td>{{ rupiah($request->harga_base_pail) }}</td>
+                                    <td>1</td>
+                                    <td>{{ rupiah($request->harga_base_pail) }}</td>
+                                </tr>
+                                @php
+                                    $result = 0;
+                                @endphpimage.png
+                                @foreach ($typeThree->pricelist[0]->jenis->formula as $formula => $harga)
+                                    @php
+                                        if ($formula == 0) {
+                                            $ms = $request->MS;
+                                        } else {
+                                            $ms = $request->BP;
+                                        }
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $harga->kode_formula }}</td>
+                                        <td>{{ $ms . '/ ml' }}</td>
+                                        <td>
+                                            {{ (($harga->pail/5)*4) . ' ml' }}
+                                        </td>
+                                        <td>{{ rupiah($ms * (($harga->pail/5)*4)) }}</td>
+                                    </tr>
+
+                                    @php
+                                        $result += $ms * (($harga->pail/5)*4);
                                     @endphp
                                 @endforeach
                                 <tr>

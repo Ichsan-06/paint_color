@@ -24,6 +24,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Type ID</th>
                             <th>Nama Type</th>
                         </tr>
                     </thead>
@@ -32,6 +33,7 @@
                         @foreach ($types as $t)
                             <tr>
                                 <td width="10">{{ $loop->iteration }}</td>
+                                <td>{{ $t->id }}</td>
                                 <td>{{ $t->name }}</td>
                                 <td width="60%">
                                     <a href="{{ route('type.edit', $t->id) }}" class="btn btn-sm btn-primary">Edit</a>

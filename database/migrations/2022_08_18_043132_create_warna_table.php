@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('warna', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori');
-            $table->string('kode_warna',10);
-            $table->string('nama_label',10);
-            $table->string('nama_warna');
-            $table->string('kode_hex');
+            $table->string('kategori')->nullable();
+            $table->string('kode_warna',10)->nullable();
+            $table->string('nama_label',10)->nullable();
+            $table->string('nama_warna')->nullable();
+            $table->string('kode_hex')->nullable();
             $table->timestamps();
         });
     }

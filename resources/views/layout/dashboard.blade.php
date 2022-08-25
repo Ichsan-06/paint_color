@@ -68,6 +68,12 @@
                                 Warna
                             </a>
 
+                            {{-- colorant --}}
+                            <a class="nav-link" href="{{route('colorant.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Coloran
+                            </a>
+
                             {{-- Formula --}}
                             <a class="nav-link" href="{{route('formula.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>

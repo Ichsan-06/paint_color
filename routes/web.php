@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AwalanController;
 use App\Http\Controllers\KotaController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\WarnaController;
+use App\Http\Controllers\AwalanController;
 use App\Http\Controllers\FormulaController;
+use App\Http\Controllers\ColorantController;
 use App\Http\Controllers\PricelistController;
 
 /*
@@ -39,6 +40,9 @@ Route::get('/list-formula/{kota_id}', [AwalanController::class, 'listFormula'])-
 Route::get('/list-formula-harga/{kota_id}', [AwalanController::class, 'listFormulaHarga'])->name('list.formulaHarga');
 Route::get('/hitung/{warna_id}', [AwalanController::class, 'hitung'])->name('hitung');
 Route::post('/hitung/{warna_id}', [AwalanController::class, 'postHitung'])->name('hitung.post');
+
+Route::get('/list-formula-in-one/{formula_id}/kota/{kota_id}', [AwalanController::class, 'formulaInOne'])->name('formula.inOne');
+Route::get('/list-formula-harga-inOne/{kota_id}', [AwalanController::class, 'listInFormulaHarga'])->name('formula.hargaInOne');
 
 Route::get('login', function () {
     return view('login');
@@ -75,6 +79,7 @@ Route::post('jenis/{id}/delete', [JenisController::class, 'delete'])->name('jeni
 // Pricelist
 Route::get('pricelist', [PricelistController::class, 'index'])->name('pricelist.index');
 Route::get('pricelist/create', [PricelistController::class, 'create'])->name('pricelist.create');
+Route::post('pricelist/import', [PricelistController::class, 'import'])->name('pricelist.import');
 Route::post('pricelist/store', [PricelistController::class, 'store'])->name('pricelist.store');
 Route::get('pricelist/{id}/edit', [PricelistController::class, 'edit'])->name('pricelist.edit');
 Route::post('pricelist/{id}/update', [PricelistController::class, 'update'])->name('pricelist.update');
@@ -83,6 +88,7 @@ Route::post('pricelist/{id}/delete', [PricelistController::class, 'delete'])->na
 // Warna
 Route::get('warna', [WarnaController::class, 'index'])->name('warna.index');
 Route::get('warna/create', [WarnaController::class, 'create'])->name('warna.create');
+Route::post('warna/import', [WarnaController::class, 'import'])->name('warna.import');
 Route::post('warna/store', [WarnaController::class, 'store'])->name('warna.store');
 Route::get('warna/{id}/edit', [WarnaController::class, 'edit'])->name('warna.edit');
 Route::post('warna/{id}/update', [WarnaController::class, 'update'])->name('warna.update');
@@ -91,7 +97,19 @@ Route::post('warna/{id}/delete', [WarnaController::class, 'delete'])->name('warn
 // Formula
 Route::get('formula', [FormulaController::class, 'index'])->name('formula.index');
 Route::get('formula/create', [FormulaController::class, 'create'])->name('formula.create');
+Route::post('formula/import', [FormulaController::class, 'import'])->name('formula.import');
 Route::post('formula/store', [FormulaController::class, 'store'])->name('formula.store');
 Route::get('formula/{id}/edit', [FormulaController::class, 'edit'])->name('formula.edit');
 Route::post('formula/{id}/update', [FormulaController::class, 'update'])->name('formula.update');
 Route::post('formula/{id}/delete', [FormulaController::class, 'delete'])->name('formula.destroy');
+
+
+// Colorant
+Route::get('colorant', [ColorantController::class, 'index'])->name('colorant.index');
+Route::get('colorant/create', [ColorantController::class, 'create'])->name('colorant.create');
+Route::post('colorant/import', [ColorantController::class, 'import'])->name('colorant.import');
+Route::post('colorant/store', [ColorantController::class, 'store'])->name('colorant.store');
+Route::get('colorant/{id}/edit', [ColorantController::class, 'edit'])->name('colorant.edit');
+Route::post('colorant/{id}/update', [ColorantController::class, 'update'])->name('colorant.update');
+Route::post('colorant/{id}/delete', [ColorantController::class, 'delete'])->name('colorant.destroy');
+

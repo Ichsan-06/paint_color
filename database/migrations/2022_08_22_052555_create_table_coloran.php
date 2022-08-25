@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pricelist', function (Blueprint $table) {
+        Schema::create('colorant', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kota_id');
-            $table->unsignedBigInteger('type_id');
-            $table->unsignedBigInteger('jenis_id');
-            $table->string('galon')->nullable();
-            $table->string('pail')->nullable();
+            $table->string('kode')->nullable();
+            $table->string('harga');
+            $table->string('satuan');
+            $table->timestamps();
 
             $table->foreign('kota_id')->references('id')->on('kota')->onDelete('cascade');
-            $table->foreign('type_id')->references('id')->on('type')->onDelete('cascade');
-            $table->foreign('jenis_id')->references('id')->on('jenis')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pricelist');
+        Schema::dropIfExists('colorant');
     }
 };
